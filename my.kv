@@ -1,0 +1,264 @@
+
+#											working with multiple screens
+
+
+#########################################################################################################################
+#											Screen Zero : Mode Selection
+#########################################################################################################################
+<ScreenZero>: 	
+	FloatLayout:
+		orientation: 'horizontal'
+		canvas:
+			Rectangle:
+				source: "images/Template.png"
+				pos : self.pos
+				size : self.size
+    Button: 
+        text: "Start Autonomus Mode" 
+        pos_hint: {"center_x": 0.5, "center_y": 0.60}
+		size_hint: (0.43,0.25)
+		font_size: 25
+		halign : 'center'
+		font_name: "fonts/OpenSans-Bold.ttf"
+		background_color : 0.73,1.38,1.75,1.0
+        on_press: 
+            root.manager.transition.direction = 'right' 
+            root.manager.current = 'screen_one' 
+		# on_press:app.autonomus_mode_function(*args)
+
+
+    Button: 
+        text: "Start Manual Mode" 
+        pos_hint: {"center_x": 0.5, "center_y": 0.30}
+        # md_bg_color: app.theme_cls.primary_dark
+		size_hint: (0.43,0.25)
+		font_size: 25
+		halign : 'center'
+		font_name: "fonts/OpenSans-Bold.ttf"
+		background_color : 0.73,1.38,1.75,1.0
+        on_press: 
+            root.manager.transition.direction = 'right' 
+            root.manager.current = 'screen_one'	
+		on_press:app.manuel_mode_function(*args)
+
+    Label:
+        id: epic_welcome_label
+	    text : "WELCOME TO EPIC"
+		markup : False
+        halign: "center"
+	
+        size_hint: (0.8,0.3)		
+        pos_hint: {"center_x": 0.5, "center_y": 0.85}
+		# font_style: 'H3'
+		font_size:70
+		bold : True
+		font_name: "fonts/OpenSans-Bold.ttf"
+		color: 0,0,0,0			
+
+#########################################################################################################################
+#											Screen One : Main Menu
+#########################################################################################################################
+
+<ScreenOne>: 
+	FloatLayout:
+		orientation: 'horizontal'
+		canvas:
+			Rectangle:
+				source: "images/Template.png"
+				pos : self.pos
+				size : self.size
+
+	# for battery percentage : 
+    Image: 
+		id : battery_im
+		source:""
+        size_hint_x: 0.1
+		pos_hint: {"center_x": 0.9, "center_y": 0.9}
+        allow_stretch: True
+
+    MDLabel:
+        id: battery
+	    text : ""
+        halign: "center"
+        size_hint: (0.9,0.3)
+
+        pos_hint: {"center_x": 0.895, "center_y": 0.85}
+
+		
+	# Network Quality :	
+	
+    Image: 
+		id : network_im
+		source:""
+        size_hint_x: 0.1
+		pos_hint: {"center_x": 0.12, "center_y": 0.90}
+        allow_stretch: True
+		
+    MDLabel:
+        id: network
+	    text : "Network Loading"
+        halign: "center"
+        size_hint: (0.9,0.3)
+		font_name: "fonts/OpenSans-Regular.ttf"
+        pos_hint: {"center_x": 0.12, "center_y": 0.85}
+		
+    MDLabel:
+        id: new_work_con
+	    text : ""
+        halign: "center"
+        size_hint: (0.3,0.3)
+		font_name: "fonts/OpenSans-Regular.ttf"
+        pos_hint: {"center_x": 0.12, "center_y": 0.8}
+		font_size : '10sp'
+	
+    MDLabel:
+        id: human_detected
+	    text : ""
+        halign: "center"
+        size_hint: (0.9,0.3)
+		font_name: "fonts/OpenSans-Bold.ttf"
+        pos_hint: {"center_x": 0.5, "center_y": 0.55}
+		markup: True
+		
+
+    Button:
+		id: with_action_function_button
+        text: "Human Stalker"
+        pos_hint: {"center_x": 0.5, "center_y": 0.7}
+        # md_bg_color: app.theme_cls.primary_light
+		size_hint: (0.4,0.17)
+		halign : 'center'
+		font_size: "18sp"
+		font_name: "fonts/OpenSans-Bold.ttf"
+		on_press: app.with_action_function(*args)
+		background_color : 1.01,1.92,2.45,1.0
+		disabled : False
+		
+
+    Button:
+		id: floor_fuction_button
+        text: "Floor Detection"
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+		size_hint: (0.4,0.17)
+		font_size: "18sp"
+		halign : 'center'
+		font_name: "fonts/OpenSans-Bold.ttf"
+		on_press: app.floor_fuction(*args)
+		background_color : 0.73,1.38,1.75,1.0
+		disabled : False
+		
+
+    Button:
+		id: with_new_action_function_button
+        text: "Animation Mode"
+        pos_hint: {"center_x": 0.5, "center_y": 0.3}
+        md_bg_color: app.theme_cls.primary_dark
+		size_hint: (0.4,0.17)
+		halign : 'center'
+		font_size: "18sp"
+		font_name: "fonts/OpenSans-Bold.ttf"
+		# on_press: app.new_action_function(*args)
+		background_color : 0.40,0.79,0.97,1.0
+		on_press: 
+            root.manager.transition.direction = 'left' 
+            root.manager.current = 'screen_three' 
+
+    Button:
+		id: stop_button
+        text: "STOP"
+		bold : True
+        pos_hint: {"x": 0.75, "y": 50}
+       # md_bg_color: app.theme_cls.primary_dark
+		size_hint: (0.17,0.17)
+		background_color : 0.40,0.79,0.97,1.0
+		halign : 'center'
+		font_size: "18sp"
+		font_name: "fonts/OpenSans-Bold.ttf"
+		on_press: app.stop_function(*args)  
+		#on_press: 
+         #   root.manager.transition.direction = 'left' 
+          #  root.manager.current = 'screen_zero'
+
+
+    Button:
+		id: emergency_exit
+        text: "Emergency Exit"
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        md_bg_color: app.theme_cls.primary_dark
+		size_hint: (0.22,0.09)
+		font_size: "18sp"
+		halign : 'center'
+		font_name: "fonts/OpenSans-Bold.ttf"		
+		on_press: 
+            root.manager.transition.direction = 'left' 
+            root.manager.current = 'screen_two' 
+		on_press: app.emergency_exit_function(*args)
+		background_color : 2.55,0,0,1.0				
+
+#########################################################################################################################
+#											Screen Two : System Shutdown
+#########################################################################################################################				
+   
+<ScreenTwo>: 	
+    Button: 
+        text: "RESART THE SYSTEM" 
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        md_bg_color: app.theme_cls.primary_dark
+		size_hint: (0.25,0.09)
+		font_size: "18sp"
+		halign : 'center'
+		font_name: "fonts/OpenSans-Bold.ttf"
+		background_color : 2.55,0,0,1.0	
+        on_press: 
+            root.manager.transition.direction = 'right' 
+            root.manager.current = 'screen_zero' 
+
+  				
+    MDLabel:
+        id: emergy_label
+	    text : "SYSTEM SUCCESSFULLY SHUTDOWN"
+		markup : False
+        halign: "center"
+        size_hint: (0.8,0.3)		
+        pos_hint: {"center_x": 0.5, "center_y": 0.7}
+		font_style: 'H3'
+		bold : True
+		font_name: "fonts/OpenSans-Bold.ttf"
+
+		
+#########################################################################################################################
+#											Screen Three : Animation Mood
+#########################################################################################################################
+
+<ScreenThree>: 
+		
+    Image: 
+		id : im_ani
+		source:"images/new_comp.gif"
+        #size_hint_x: 0.1
+		#pos_hint: {"center_x": 0.1, "center_y": 0.5}
+		# anim_loop: 0
+		pos : self.pos
+		size : self.size
+        allow_stretch: True
+		keep_ratio: False		
+		
+    Button: 
+        text: "Back to Main Menu" 
+		opacity: 0
+		pos : self.pos
+		size : self.size
+		background_color : 0.40,0.79,0.97,1.0
+        on_press: 
+            root.manager.transition.direction = 'left' 
+            root.manager.current = 'screen_one' 
+
+    MDLabel:
+        id: click_to_back
+	    text : "Click anywhere to go back to Main Menu..."
+		markup : False
+        halign: "center"
+        size_hint: (0.57,0.1)		
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+		font_name: "fonts/OpenSans-Regular.ttf"
+ 
