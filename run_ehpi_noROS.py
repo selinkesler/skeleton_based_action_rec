@@ -123,16 +123,16 @@ if __name__ == '__main__':
     fps_tracker = FPSTracker(average_over_seconds=1)
 
     # Pose Network
-    pose_model = pose_resnet.get_pose_net(pose_resnet_config)
-    logger.info('=> loading model from {}'.format(pose_resnet_config.model_state_file))
-    pose_model.load_state_dict(torch.load(pose_resnet_config.model_state_file))
-    pose_model = pose_model.cuda()
-    pose_model.eval()
+    # pose_model = pose_resnet.get_pose_net(pose_resnet_config)
+    # logger.info('=> loading model from {}'.format(pose_resnet_config.model_state_file))
+    # pose_model.load_state_dict(torch.load(pose_resnet_config.model_state_file))
+    # pose_model = pose_model.cuda()
+    # pose_model.eval()
 
     with open('./networks/pose_estimation_2d_nets/human_pose.json', 'r') as f:
         human_pose = json.load(f)
 
-    pose_net = Pose2DNetResnet(pose_model, skeleton_type,human_pose)
+    pose_net = Pose2DNetResnet(skeleton_type,human_pose)
     pose_tracker = PoseTracker(image_size=image_size, skeleton_type=skeleton_type)
 
     # Action Network

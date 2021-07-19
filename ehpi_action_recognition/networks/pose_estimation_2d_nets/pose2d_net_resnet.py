@@ -11,9 +11,8 @@ from nobos_torch_lib.configs.pose_estimation_2d_model_configs.pose_resnet_model_
 from nobos_torch_lib.models.pose_estimation_2d_models import pose_resnet
 from nobos_torch_lib.models.pose_estimation_2d_models.pose_resnet import PoseResNet
 
-from ehpi_action_recognition.config import yolo_v3_config
-from ehpi_action_recognition.networks.detection_nets.detection_net_yolo_v3 import DetectionNetYoloV3, \
-    get_default_detector
+# from ehpi_action_recognition.config import yolo_v3_config
+# from ehpi_action_recognition.networks.detection_nets.detection_net_yolo_v3 import DetectionNetYoloV3, get_default_detector
 from ehpi_action_recognition.networks.pose_estimation_2d_nets.pose2d_net_base import Pose2DNetBase
 from ehpi_action_recognition.utils.pose_resnet_inference import get_human, get_human_pure, get_human_pure_w_bb
 
@@ -45,22 +44,18 @@ def get_image_content_from_humans(humans: List[Human]) -> ImageContent:
 class Pose2DNetResnet(Pose2DNetBase):
     __slots__ = ['model', 'skeleton_type', 'detector','topology','model_trt','human_pose']
 
-    def __init__(self, model: PoseResNet, skeleton_type: Type[SkeletonBase],human_pose):
+    def __init__(self, skeleton_type: Type[SkeletonBase],human_pose):
         super().__init__(skeleton_type)
-        self.model = model
         self.human_pose = human_pose
-        self.detector: DetectionNetYoloV3 = get_default_detector(yolo_v3_config)
+        # self.detector: DetectionNetYoloV3 = get_default_detector(yolo_v3_config)
 
         # For new Pose Estimation
         self.topology = trt_pose.coco.coco_category_to_topology(human_pose)
-       
-        # OPTIMIZED_MODEL = './densenet121_baseline_att_256x256_B_epoch_160.pth'
         OPTIMIZED_MODEL = './resnet18_baseline_att_224x224_A_epoch_249_trt.pth'
         print(OPTIMIZED_MODEL)
 
         self.model_trt = TRTModule()
         self.model_trt.load_state_dict(torch.load(OPTIMIZED_MODEL))
-
         self.model = self.model_trt
 
 
