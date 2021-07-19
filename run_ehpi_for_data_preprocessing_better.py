@@ -135,20 +135,20 @@ if __name__ == '__main__':
                             y_csv_array_mitte[0,0]=action_ID # giving the action ID to all the colums corresponding to x_dataset
                             y_csv_array_mitte[0,1]=s # so that specific_action_ID her action da yeni bir ID alsin diye -- a will be +1 with every different sample
                             
-                            with open('/home/xavier1/PrePro/complete_X_train.csv','a') as fd:
+                            with open('./PrePro/complete_X_train.csv','a') as fd:
                                 np.savetxt(fd, ehpi_img_save_transpose_reshaped_mitte,delimiter=',',fmt='%1.3f' )         
-                            with open('/home/xavier1/PrePro/complete_y_train.csv','a') as fd:
+                            with open('./PrePro/complete_y_train.csv','a') as fd:
                                 np.savetxt(fd, y_csv_array_mitte,delimiter=',',fmt='%d' ) 
             
                             if a % 5 == 0 : 
-                                with open('/home/xavier1/PrePro/X_test.csv','a') as fd:
+                                with open('./PrePro/X_test.csv','a') as fd:
                                     np.savetxt(fd, ehpi_img_save_transpose_reshaped_mitte,delimiter=',',fmt='%1.3f' )         
-                                with open('/home/xavier1/PrePro/y_test.csv','a') as fd:
+                                with open('./PrePro/y_test.csv','a') as fd:
                                     np.savetxt(fd, y_csv_array_mitte,delimiter=',',fmt='%d' )                                    
                             else :
-                                with open('/home/xavier1/PrePro/X_train.csv','a') as fd:
+                                with open('./PrePro/X_train.csv','a') as fd:
                                     np.savetxt(fd, ehpi_img_save_transpose_reshaped_mitte,delimiter=',',fmt='%1.3f' )         
-                                with open('/home/xavier1/PrePro/y_train.csv','a') as fd:
+                                with open('./PrePro/y_train.csv','a') as fd:
                                     np.savetxt(fd, y_csv_array_mitte,delimiter=',',fmt='%d' )                     
             
                             img_save_mitte = np.zeros((32, 15, 3), dtype=np.float32)                                  
@@ -171,21 +171,21 @@ if __name__ == '__main__':
                         y_csv_array[0,0]=action_ID # giving the action ID to all the colums corresponding to x_dataset
                         y_csv_array[0,1]=s # so that specific_action_ID her action da yeni bir ID alsin diye -- a will be +1 with every different sample
                         
-                        with open('/home/xavier1/PrePro/complete_X_train.csv','a') as fd:
+                        with open('./PrePro/complete_X_train.csv','a') as fd:
                             np.savetxt(fd, ehpi_img_save_transpose_reshaped,delimiter=',',fmt='%1.3f' )     
-                        with open('/home/xavier1/PrePro/complete_y_train.csv','a') as fd:
+                        with open('./PrePro/complete_y_train.csv','a') as fd:
                             np.savetxt(fd, y_csv_array,delimiter=',',fmt='%d' ) 
 
                         if a % 5 == 0 : 
-                            with open('/home/xavier1/PrePro/X_test.csv','a') as fd:
+                            with open('./PrePro/X_test.csv','a') as fd:
                                 np.savetxt(fd, ehpi_img_save_transpose_reshaped,delimiter=',',fmt='%1.3f' )     
-                            with open('/home/xavier1/PrePro/y_test.csv','a') as fd:
+                            with open('./PrePro/y_test.csv','a') as fd:
                                 np.savetxt(fd, y_csv_array,delimiter=',',fmt='%d' )    
                                 
                         else :
-                            with open('/home/xavier1/PrePro//X_train.csv','a') as fd:
+                            with open('./PrePro/X_train.csv','a') as fd:
                                 np.savetxt(fd, ehpi_img_save_transpose_reshaped,delimiter=',',fmt='%1.3f' )     
-                            with open('/home/xavier1/PrePro/y_train.csv','a') as fd:
+                            with open('./PrePro/y_train.csv','a') as fd:
                                 np.savetxt(fd, y_csv_array,delimiter=',',fmt='%d' )                     
                                 
                         img_save = np.zeros((32, 15, 3), dtype=np.float32)  
