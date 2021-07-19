@@ -54,12 +54,14 @@ class Pose2DNetResnet(Pose2DNetBase):
         # For new Pose Estimation
         self.topology = trt_pose.coco.coco_category_to_topology(human_pose)
        
-        # OPTIMIZED_MODEL = '/home/xavier1/catkin_ws/src/gui/src/densenet121_baseline_att_256x256_B_epoch_160.pth'
-        OPTIMIZED_MODEL = '/home/xavier1/catkin_ws/src/gui/src/resnet18_baseline_att_224x224_A_epoch_249_trt.pth'
+        # OPTIMIZED_MODEL = './densenet121_baseline_att_256x256_B_epoch_160.pth'
+        OPTIMIZED_MODEL = './resnet18_baseline_att_224x224_A_epoch_249_trt.pth'
         print(OPTIMIZED_MODEL)
 
         self.model_trt = TRTModule()
         self.model_trt.load_state_dict(torch.load(OPTIMIZED_MODEL))
+
+        self.model = self.model_trt
 
 
     def get_humans_from_img(self, img: np.ndarray) -> List[Human]:
@@ -91,10 +93,6 @@ class Pose2DNetResnet(Pose2DNetBase):
         humans: List[Human] = []
         for human_to_redetect in humans_to_redetect:
             human = get_human_pure(self.model, self.skeleton_type, img, self.human_pose, self.topology,self.model_trt)
-          #  if human.score < min_human_score:
-           #     continue
-            print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
-            print(human_to_redetect.bounding_box)
             human.bounding_box = human_to_redetect.bounding_box
             human.uid = human_to_redetect.uid
             humans.append(human)

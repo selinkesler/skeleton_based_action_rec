@@ -129,7 +129,7 @@ if __name__ == '__main__':
     pose_model = pose_model.cuda()
     pose_model.eval()
 
-    with open('/home/xavier1/catkin_ws/src/gui/src/networks/pose_estimation_2d_nets/human_pose.json', 'r') as f:
+    with open('./networks/pose_estimation_2d_nets/human_pose.json', 'r') as f:
         human_pose = json.load(f)
 
     pose_net = Pose2DNetResnet(pose_model, skeleton_type,human_pose)
